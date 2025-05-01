@@ -2,10 +2,11 @@ import 'package:fpdart/fpdart.dart';
 import 'package:simple_todo_app/domain/repositories/todo_repository.dart';
 
 /// Use case for deleting all stored Todos.
-class DeleteDodo {
+/// Use case for deleting all stored Todos.
+class DeleteAllTodos {
   final TodoRepository repository;
 
-  DeleteDodo({required this.repository});
+  DeleteAllTodos(this.repository);
 
   /// Deletes all Todos from the repository.
   ///

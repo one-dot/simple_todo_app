@@ -1,6 +1,7 @@
 import 'package:get_it/get_it.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:simple_todo_app/application/todo/bloc/todo_bloc.dart';
+import 'package:simple_todo_app/domain/repositories/todo_repository.dart';
 import 'package:simple_todo_app/domain/usescases/add_todo.dart';
 import 'package:simple_todo_app/domain/usescases/delete_all_todos.dart';
 import 'package:simple_todo_app/domain/usescases/delete_completed_todos.dart';
@@ -14,17 +15,16 @@ import 'package:simple_todo_app/infrastructure/repositories/todo_repository_impl
 final sl = GetIt.instance;
 
 Future<void> init() async {
-  // External
+  // Hive
   await Hive.initFlutter();
+  Hive.registerAdapter(TodoModelAdapter());
 
   // Data Sources
   sl.registerLazySingleton(() => TodoLocalDatasource());
 
   // Repository
-  sl.registerLazySingleton(() => TodoRepositoryImpl(sl()));
-
-  // Hive
-  Hive.registerAdapter(TodoModelAdapter());
+  // sl.registerLazySingleton(() => TodoRepositoryImpl(sl()));
+  sl.registerLazySingleton<TodoRepository>(() => TodoRepositoryImpl(sl<TodoLocalDatasource>()));
 
   // Use Cases
   sl.registerLazySingleton(() => AddTodo(repository: sl()));
@@ -34,7 +34,7 @@ Future<void> init() async {
   sl.registerLazySingleton(() => DeleteCompletedTodos(repository: sl()));
   sl.registerLazySingleton(() => ToggleCompleteTodo(repository: sl()));
 
-  // Bloc
+  // Bloc als Factory (jedes Widget bekommt eine eigene Instanz)
   sl.registerFactory(
     () => TodoBloc(
       getAllTodos: sl(),

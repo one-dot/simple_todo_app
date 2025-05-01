@@ -17,11 +17,18 @@ class TodoBloc extends Bloc<TodoEvent, TodoState> {
   final GetAllTodos getAllTodos;
   final AddTodo addTodo;
   final DeleteTodo deleteTodo;
-  final DeleteAllTodos delteAllTodos;
+  final DeleteAllTodos deleteAllTodos;
   final DeleteCompletedTodos deleteCompletedTodos;
   final ToggleCompleteTodo toggleCompleteTodo;
 
-  TodoBloc({required this.getAllTodos, required this.addTodo, required this.deleteTodo, required this.delteAllTodos, required this.deleteCompletedTodos, required this.toggleCompleteTodo}) : super(TodoInitial()) {
+  TodoBloc({
+    required this.getAllTodos,
+    required this.addTodo,
+    required this.deleteTodo,
+    required this.deleteAllTodos,
+    required this.deleteCompletedTodos,
+    required this.toggleCompleteTodo,
+  }) : super(TodoInitial()) {
     on<LoadTodos>((event, emit) async {
       emit(TodoLoading());
       final result = await getAllTodos();
@@ -29,7 +36,11 @@ class TodoBloc extends Bloc<TodoEvent, TodoState> {
     });
 
     on<AddTodoEvent>((event, emit) async {
-      final newTodo = Todo(id: DateTime.now().millisecondsSinceEpoch.toString(), title: event.title, isCompleted: false);
+      final newTodo = Todo(
+        id: DateTime.now().millisecondsSinceEpoch.toString(),
+        title: event.title,
+        isCompleted: false,
+      );
       final result = await addTodo(newTodo);
       result.match((l) => null, (_) => add(LoadTodos()));
     });
@@ -45,7 +56,7 @@ class TodoBloc extends Bloc<TodoEvent, TodoState> {
     });
 
     on<DeleteAllTodosEvent>((event, emit) async {
-      final result = await delteAllTodos();
+      final result = await deleteAllTodos();
       result.match((l) => null, (_) => add(LoadTodos()));
     });
 

@@ -5,7 +5,7 @@ import 'package:simple_todo_app/domain/repositories/todo_repository.dart';
 class DeleteCompletedTodos {
   final TodoRepository repository;
 
-  DeleteCompletedTodos(this.repository);
+  DeleteCompletedTodos({required this.repository});
 
   /// Deletes all Todos that are marked as completed.
   ///

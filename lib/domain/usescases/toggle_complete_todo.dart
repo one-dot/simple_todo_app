@@ -5,7 +5,7 @@ import 'package:simple_todo_app/domain/repositories/todo_repository.dart';
 class ToggleCompleteTodo {
   final TodoRepository repository;
 
-  ToggleCompleteTodo(this.repository);
+  ToggleCompleteTodo({required this.repository});
 
   /// Toggles the completed status of the Todo with the given [id].
   ///

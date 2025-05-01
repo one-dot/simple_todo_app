@@ -6,7 +6,7 @@ import 'package:simple_todo_app/domain/repositories/todo_repository.dart';
 class DeleteAllTodos {
   final TodoRepository repository;
 
-  DeleteAllTodos(this.repository);
+  DeleteAllTodos({required this.repository});
 
   /// Deletes all Todos from the repository.
   ///

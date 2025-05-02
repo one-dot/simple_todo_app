@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:simple_todo_app/application/todo/bloc/todo_bloc.dart';
 
+/// A text input field with a button to add new Todos.
+///
+/// Sends an [AddTodoEvent] when the user submits text.
 class TodoInputField extends StatefulWidget {
   const TodoInputField({super.key});
 

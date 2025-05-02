@@ -5,6 +5,8 @@ import 'package:simple_todo_app/presentation/widgets/Todo_List_Item.dart';
 import 'package:simple_todo_app/presentation/widgets/clear_buttons.dart';
 import 'package:simple_todo_app/presentation/widgets/todo_input_field.dart';
 
+/// The main page of the Todo app that displays the input field,
+/// the list of tasks, and action buttons to clear tasks.
 class TodoPage extends StatelessWidget {
   const TodoPage({super.key});
 
@@ -14,16 +16,23 @@ class TodoPage extends StatelessWidget {
       appBar: AppBar(title: const Text('To-Do List')),
       body: Column(
         children: [
+          // Input field and Add button to enter new todos
           const Padding(padding: EdgeInsets.all(12), child: TodoInputField()),
+
+          // Expanded BlocBuilder to listen to TodoBloc state and show todo list
           Expanded(
             child: BlocBuilder<TodoBloc, TodoState>(
               builder: (context, state) {
+                // Show loading indicator while fetching todos
                 if (state is TodoLoading) {
                   return const Center(child: CircularProgressIndicator());
-                } else if (state is TodoLoaded) {
+                }
+                // Show the list of todos when loaded
+                else if (state is TodoLoaded) {
                   if (state.todos.isEmpty) {
                     return const Center(child: Text('No tasks yet.'));
                   }
+                  // ListView of todos with spacing between items
                   return ListView.separated(
                     itemCount: state.todos.length,
                     separatorBuilder: (_, __) => const Divider(height: 1),

@@ -3,6 +3,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:simple_todo_app/application/todo/bloc/todo_bloc.dart';
 import 'package:simple_todo_app/domain/entities/todo.dart';
 
+/// A single visual representation of a [Todo] item.
+///
+/// Displays the task title with a checkbox to toggle completion
+/// and a delete button that triggers the deletion of the task.
 class TodoListItem extends StatelessWidget {
   final Todo todo;
 
@@ -20,14 +24,16 @@ class TodoListItem extends StatelessWidget {
         trailing: IconButton(
           icon: const Icon(Icons.delete),
           onPressed: () {
+            // 1. Delete the todo via BLoC
             bloc.add(DeleteTodoEvent(todo.id));
-
+            // 2. Show snackbar with Undo option
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
                 content: const Text('Task deleted'),
                 action: SnackBarAction(
                   label: 'Undo',
                   onPressed: () {
+                    // 3. If undo is pressed, re-add the same Todo via BLoC
                     bloc.add(AddTodoEvent(todo.title, id: todo.id));
                   },
                 ),

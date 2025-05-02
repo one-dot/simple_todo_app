@@ -8,10 +8,14 @@ sealed class TodoEvent {}
 final class LoadTodos extends TodoEvent {}
 
 /// Adds a new Todo with the given title.
+///
+/// If [id] is provided, it will be used instead of generating a new one.
+/// This is useful for restoring a deleted Todo via an Undo action.
 final class AddTodoEvent extends TodoEvent {
   final String title;
+  final String? id; // Optional
 
-  AddTodoEvent(this.title);
+  AddTodoEvent(this.title, {this.id});
 }
 
 /// Deletes a Todo by ID.

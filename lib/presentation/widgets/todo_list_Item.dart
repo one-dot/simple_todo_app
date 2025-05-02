@@ -17,7 +17,24 @@ class TodoListItem extends StatelessWidget {
       child: ListTile(
         leading: Checkbox(value: todo.isCompleted, onChanged: (_) => bloc.add(ToggleTodoCompletionEvent(todo.id))),
         title: Text(todo.title, style: TextStyle(decoration: todo.isCompleted ? TextDecoration.lineThrough : null)),
-        trailing: IconButton(icon: const Icon(Icons.delete), onPressed: () => bloc.add(DeleteTodoEvent(todo.id))),
+        trailing: IconButton(
+          icon: const Icon(Icons.delete),
+          onPressed: () {
+            bloc.add(DeleteTodoEvent(todo.id));
+
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: const Text('Task deleted'),
+                action: SnackBarAction(
+                  label: 'Undo',
+                  onPressed: () {
+                    bloc.add(AddTodoEvent(todo.title, id: todo.id));
+                  },
+                ),
+              ),
+            );
+          },
+        ),
       ),
     );
   }

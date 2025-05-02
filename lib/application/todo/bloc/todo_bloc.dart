@@ -36,12 +36,17 @@ class TodoBloc extends Bloc<TodoEvent, TodoState> {
     });
 
     on<AddTodoEvent>((event, emit) async {
+      // If an ID is provided, reuse it (e.g. during an undo operation).
+      // Otherwise, generate a fresh ID for a new Todo item.
       final newTodo = Todo(
-        id: DateTime.now().millisecondsSinceEpoch.toString(),
+        id: event.id ?? DateTime.now().millisecondsSinceEpoch.toString(),
         title: event.title,
         isCompleted: false,
       );
+
       final result = await addTodo(newTodo);
+
+      // Refresh the UI by reloading the Todo list after adding
       result.match((l) => null, (_) => add(LoadTodos()));
     });
 

@@ -1,10 +1,12 @@
 part of 'todo_bloc.dart';
 
-//TODO: Consider to use Equatable
 /// Represents the state of the Todo list.
 @immutable
-sealed class TodoState {
+sealed class TodoState extends Equatable {
   const TodoState();
+
+  @override
+  List<Object?> get props => [];
 }
 
 /// Base state class for all Todo states.
@@ -22,6 +24,9 @@ final class TodoLoaded extends TodoState {
   final List<Todo> todos;
 
   const TodoLoaded(this.todos);
+
+  @override
+  List<Object?> get props => [todos];
 }
 
 /// State for error handling
@@ -29,4 +34,7 @@ final class TodoError extends TodoState {
   final String message;
 
   const TodoError(this.message);
+
+  @override
+  List<Object?> get props => [message];
 }

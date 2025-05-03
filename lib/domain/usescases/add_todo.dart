@@ -1,4 +1,5 @@
 import 'package:fpdart/fpdart.dart';
+import 'package:simple_todo_app/core/todo_failure.dart';
 import 'package:simple_todo_app/domain/entities/todo.dart';
 import 'package:simple_todo_app/domain/repositories/todo_repository.dart';
 
@@ -11,7 +12,7 @@ class AddTodo {
   /// Adds the given [todo] to the repository.
   ///
   /// Returns [Right<void>] on success, or [Left<Exception>] if an error occurs.
-  Future<Either<Exception, void>> call(Todo todo) {
+  Future<Either<TodoFailure, void>> call(Todo todo) {
     return repository.addTodo(todo);
   }
 }

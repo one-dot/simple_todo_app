@@ -19,9 +19,21 @@ class TodoPage extends StatelessWidget {
           // Input field and Add button to enter new todos
           const Padding(padding: EdgeInsets.all(12), child: TodoInputField()),
 
-          // Expanded BlocBuilder to listen to TodoBloc state and show todo list
+          // Expanded BlocConsumer to listen to TodoBloc state and show todo list
           Expanded(
-            child: BlocBuilder<TodoBloc, TodoState>(
+            child: BlocConsumer<TodoBloc, TodoState>(
+              /// Show snackbar only when an error occurs
+              listenWhen: (previous, current) => current is TodoError,
+
+              /// Handle error messages by showing a snackbar
+              listener: (context, state) {
+                if (state is TodoError) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text(state.message, style: TextStyle(fontSize: 16)), backgroundColor: Colors.red),
+                  );
+                }
+              },
+              buildWhen: (previous, current) => current is TodoLoading || current is TodoLoaded,
               builder: (context, state) {
                 // Show loading indicator while fetching todos
                 if (state is TodoLoading) {
@@ -32,7 +44,7 @@ class TodoPage extends StatelessWidget {
                   if (state.todos.isEmpty) {
                     return const Center(child: Text('No tasks yet.'));
                   }
-                  // ListView of todos with spacing between items
+                  // ListView of all todos with spacing between items
                   return ListView.separated(
                     itemCount: state.todos.length,
                     separatorBuilder: (_, __) => const Divider(height: 1),
@@ -46,6 +58,8 @@ class TodoPage extends StatelessWidget {
               },
             ),
           ),
+
+          /// Buttons to clear completed or all todos
           const Padding(padding: EdgeInsets.symmetric(horizontal: 12, vertical: 20), child: ClearButtons()),
         ],
       ),

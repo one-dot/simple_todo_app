@@ -18,7 +18,7 @@ final class TodoLoaded extends TodoState {
   TodoLoaded(this.todos);
 }
 
-/// Optional: state for error handling (not aktiv genutzt im Bloc oben)
+/// State for error handling
 final class TodoError extends TodoState {
   final String message;
 

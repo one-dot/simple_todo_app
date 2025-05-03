@@ -3,5 +3,5 @@ class Todo {
   final String title;
   final bool isCompleted;
 
-  Todo({required this.id, required this.title, required this.isCompleted});
+  const Todo({required this.id, required this.title, required this.isCompleted});
 }

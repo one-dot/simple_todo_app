@@ -1,12 +1,12 @@
 import 'package:fpdart/fpdart.dart';
+import 'package:simple_todo_app/core/todo_failure.dart';
 import 'package:simple_todo_app/domain/entities/todo.dart';
 
-//TODO: Consider replacing Exception with a custom Failure class for better error handling.
 abstract class TodoRepository {
-  Future<Either<Exception, List<Todo>>> getAllTodos();
-  Future<Either<Exception, void>> addTodo(Todo todo);
-  Future<Either<Exception, void>> deleteTodo(String id);
-  Future<Either<Exception, void>> deleteAllTodos();
-  Future<Either<Exception, void>> deleteCompletedTodos();
-  Future<Either<Exception, void>> toggleCompleteTodo(String id);
+  Future<Either<TodoFailure, List<Todo>>> getAllTodos();
+  Future<Either<TodoFailure, void>> addTodo(Todo todo);
+  Future<Either<TodoFailure, void>> deleteTodo(String id);
+  Future<Either<TodoFailure, void>> deleteAllTodos();
+  Future<Either<TodoFailure, void>> deleteCompletedTodos();
+  Future<Either<TodoFailure, void>> toggleCompleteTodo(String id);
 }

@@ -12,7 +12,6 @@ part 'todo_event.dart';
 part 'todo_state.dart';
 
 //TODO Consider using the uuid package to generate random IDs
-//TODO Consider to extend error handling
 class TodoBloc extends Bloc<TodoEvent, TodoState> {
   final GetAllTodos getAllTodos;
   final AddTodo addTodo;
@@ -32,7 +31,7 @@ class TodoBloc extends Bloc<TodoEvent, TodoState> {
     on<LoadTodos>((event, emit) async {
       emit(TodoLoading());
       final result = await getAllTodos();
-      result.match((l) => emit(TodoError('Failed to load todos')), (todos) => emit(TodoLoaded(todos)));
+      result.match((failure) => emit(TodoError(failure.message)), (todos) => emit(TodoLoaded(todos)));
     });
 
     on<AddTodoEvent>((event, emit) async {
@@ -47,27 +46,27 @@ class TodoBloc extends Bloc<TodoEvent, TodoState> {
       final result = await addTodo(newTodo);
 
       // Refresh the UI by reloading the Todo list after adding
-      result.match((l) => null, (_) => add(LoadTodos()));
+      result.match((failure) => emit(TodoError(failure.message)), (_) => add(LoadTodos()));
     });
 
     on<DeleteTodoEvent>((event, emit) async {
       final result = await deleteTodo(event.id);
-      result.match((l) => null, (_) => add(LoadTodos()));
+      result.match((failure) => emit(TodoError(failure.message)), (_) => add(LoadTodos()));
     });
 
     on<ToggleTodoCompletionEvent>((event, emit) async {
       final result = await toggleCompleteTodo(event.id);
-      result.match((l) => null, (_) => add(LoadTodos()));
+      result.match((failure) => emit(TodoError(failure.message)), (_) => add(LoadTodos()));
     });
 
     on<DeleteAllTodosEvent>((event, emit) async {
       final result = await deleteAllTodos();
-      result.match((l) => null, (_) => add(LoadTodos()));
+      result.match((failure) => emit(TodoError(failure.message)), (_) => add(LoadTodos()));
     });
 
     on<DeleteCompletedTodosEvent>((event, emit) async {
       final result = await deleteCompletedTodos();
-      result.match((l) => null, (_) => add(LoadTodos()));
+      result.match((failure) => emit(TodoError(failure.message)), (_) => add(LoadTodos()));
     });
   }
 }

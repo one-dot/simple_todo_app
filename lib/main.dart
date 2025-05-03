@@ -18,6 +18,10 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(home: BlocProvider(create: (_) => di.sl<TodoBloc>()..add(LoadTodos()), child: const TodoPage()));
+    return MaterialApp(
+      title: 'Simple Todo App',
+      debugShowCheckedModeBanner: false,
+      home: BlocProvider(create: (_) => di.sl<TodoBloc>()..add(LoadTodos()), child: const TodoPage()),
+    );
   }
 }

@@ -30,7 +30,10 @@ class TodoListItem extends StatelessWidget {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
                 content: const Text('Task deleted'),
+                backgroundColor: Colors.blue,
+                padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
                 action: SnackBarAction(
+                  textColor: Colors.white,
                   label: 'Undo',
                   onPressed: () {
                     // 3. If undo is pressed, re-add the same Todo via BLoC

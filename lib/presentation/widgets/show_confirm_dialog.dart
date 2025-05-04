@@ -15,8 +15,14 @@ Future<bool> showConfirmDialog({
           title: Text(title),
           content: Text(content),
           actions: [
-            TextButton(onPressed: () => Navigator.of(ctx).pop(false), child: Text(cancelText)),
-            ElevatedButton(onPressed: () => Navigator.of(ctx).pop(true), child: Text(confirmText)),
+            ElevatedButton(
+              onPressed: () => Navigator.of(ctx).pop(false),
+              child: Text(cancelText, style: TextStyle(color: Colors.deepPurple)),
+            ),
+            ElevatedButton(
+              onPressed: () => Navigator.of(ctx).pop(true),
+              child: Text(confirmText, style: TextStyle(color: Colors.deepPurple)),
+            ),
           ],
         ),
   );

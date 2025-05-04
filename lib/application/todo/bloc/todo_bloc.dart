@@ -12,7 +12,6 @@ import 'package:simple_todo_app/domain/usescases/toggle_complete_todo.dart';
 part 'todo_event.dart';
 part 'todo_state.dart';
 
-//TODO Consider using the uuid package to generate random IDs
 class TodoBloc extends Bloc<TodoEvent, TodoState> {
   final GetAllTodos getAllTodos;
   final AddTodo addTodo;

@@ -28,7 +28,7 @@
 - ✅ Add "Clear All Tasks" button with confirmation dialog
 - ✅ Responsive layout 
 - ✅ Undo snackbar appears after deleting a single todo
-- ✅ Add simple testing example
+- ✅ Add simple testing examples
 
 
 

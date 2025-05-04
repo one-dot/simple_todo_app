@@ -13,7 +13,7 @@ class TodoPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('To-Do List')),
+      appBar: AppBar(title: Center(child: const Text('To-Do List'))),
       body: Column(
         children: [
           // Input field and Add button to enter new todos

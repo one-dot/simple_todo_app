@@ -15,20 +15,20 @@
 
 ### Tasks
 
-- [x] Add Task
-- [x] Remove task
-- [x] Mark task as completed
-- [x] Button: Clear Completed Tasks
-- [x] Button: Clear All Tasks
-- [x] Use Hive for local todo storage
+- ✅ Add Task
+- ✅ Remove task
+- ✅ Mark task as completed
+- ✅ Button: Clear Completed Tasks
+- ✅ Button: Clear All Tasks
+- ✅ Use Hive for local todo storage
 
 ###  Additional Improvements
-- [x] Error handling with snackbar feedback
-- [x] Add "Clear Completed Tasks" button with confirmation dialog
-- [x] Add "Clear All Tasks" button with confirmation dialog
-- [x] Responsive layout 
-- [x] Undo snackbar appears after deleting a single todo
-- [x] Add simple testing example
+- ✅ Error handling with snackbar feedback
+- ✅ Add "Clear Completed Tasks" button with confirmation dialog
+- ✅ Add "Clear All Tasks" button with confirmation dialog
+- ✅ Responsive layout 
+- ✅ Undo snackbar appears after deleting a single todo
+- ✅ Add simple testing example
 
 
 
